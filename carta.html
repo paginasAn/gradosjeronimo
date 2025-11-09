@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+  <title>Invitación de Grado - Jerónimo Botero Quintero</title>
+  <style>
+    /* ======== ESTILOS GENERALES ======== */
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(230,0,0,0.1));
+      overflow-x: hidden;
+      color: #333;
+    }
+
+    /* ======== FONDO DE BIRRETES ======== */
+    .birretes-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .birrete {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-image: url('img/birrete2.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.3;
+      animation: caer 10s linear infinite;
+    }
+
+    @keyframes caer {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ======== CONTENEDOR PRINCIPAL ======== */
+    .carta-wrapper {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    .carta-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+      max-width: 700px;
+      text-align: center;
+      border: 5px solid #b00;
+      position: relative;
+      animation: aparecer 1.5s ease-out;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ======== FOTO DEL GRADUANDO ======== */
+    .foto-graduando {
+      width: 220px;
+      height: 270px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      border: 5px solid #b00;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .foto-graduando img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* ✅ muestra toda la cara sin recorte */
+      object-position: center;
+      transform: scale(1.15); /* hace que se vea más llena la elipse sin cortar */
+    }
+
+    h1 {
+      font-size: 1.9em;
+      color: #a00;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .detalles {
+      margin: 20px 0;
+      font-size: 1.1em;
+      color: #222;
+    }
+
+    /* ======== BOTONES ======== */
+    .botones-carta {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      background: #b00;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      width: 80%;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      animation: flotar 3s ease-in-out infinite;
+    }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    .btn:hover {
+      background: #d00;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .btn.dorado {
+      background: #c5a100;
+    }
+
+    .btn.dorado:hover {
+      background: #e6b800;
+    }
+
+    /* ======== CUENTA REGRESIVA ======== */
+    .countdown {
+      font-size: 1.3em;
+      color: #333;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    /* ======== FIRMA ======== */
+    .firma {
+      margin-top: 25px;
+      font-style: italic;
+      font-size: 1em;
+      color: #444;
+    }
+
+    /* ======== RESPONSIVE ======== */
+    @media (max-width: 600px) {
+      .carta-box {
+        padding: 25px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      .foto-graduando {
+        width: 160px;
+        height: 200px;
+      }
+      .foto-graduando img {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="musicaFondo" autoplay loop>
+    <source src="audio/musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="birretes-container" id="birretes"></div>
+
+  <div class="carta-wrapper">
+    <div class="carta-box">
+      <div class="foto-graduando">
+        <img src="img/jeronimo.jpg" alt="Jerónimo Botero Quintero">
+      </div>
+
+      <h1>🎓 Invitación a la Graduación de<br>Jerónimo Botero Quintero 🎓</h1>
+
+      <p>Con gran orgullo, la familia <strong>Moreno Quintero</strong> tiene el honor de invitarte a celebrar un logro muy especial: la <strong>graduación de Jerónimo Botero Quintero</strong>.</p>
+
+      <p>Te esperamos para compartir este día lleno de alegría, recuerdos y nuevos comienzos.</p>
+
+      <div class="detalles">
+        <p><strong>📅 Fecha:</strong> 7 de diciembre de 2025</p>
+        <p><strong>🕔 Hora:</strong> A partir de las 5:00 p.m.</p>
+        <p><strong>📍 Lugar:</strong> Carrera 71 #44A - 15, Barrio Florida Nueva</p>
+      </div>
+
+      <div class="countdown" id="countdown">Cargando cuenta regresiva...</div>
+
+      <div class="botones-carta">
+        <a href="https://maps.app.goo.gl/U8aKAhSyTDLCJ9Qh7" target="_blank" class="btn">📍 Ver ubicación</a>
+        <a href="https://forms.gle/kPaVHjFEVskYdnek6" target="_blank" class="btn dorado">✅ Confirmar asistencia</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Graduación+Jerónimo+Botero+Quintero&dates=20251207T220000Z/20251208T010000Z&details=Celebración+de+la+graduación+de+Jerónimo+Botero+Quintero&location=Carrera+71+%2344A-15,+Barrio+Florida+Nueva" target="_blank" class="btn">📅 Agendar en Google Calendar</a>
+      </div>
+
+      <p class="firma">
+        Esperamos contar con tu presencia para celebrar este gran logro.<br>
+        <strong>Con aprecio, Familia Moreno Quintero</strong>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('birretes');
+    for (let i = 0; i < 12; i++) {
+      const birrete = document.createElement('div');
+      birrete.classList.add('birrete');
+      birrete.style.left = Math.random() * 100 + '%';
+      birrete.style.animationDuration = (8 + Math.random() * 5) + 's';
+      birrete.style.animationDelay = Math.random() * 5 + 's';
+      container.appendChild(birrete);
+    }
+
+    const countdown = document.getElementById('countdown');
+    const targetDate = new Date('December 7, 2025 17:00:00').getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance < 0) {
+        countdown.innerHTML = "🎉 ¡Hoy es el gran día de la graduación! 🎓";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdown.innerHTML = `⏳ Faltan ${days} días, ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+
+    const musica = document.getElementById('musicaFondo');
+    musica.volume = 0.3;
+    document.body.addEventListener('click', () => musica.play(), { once: true });
+  </script>
+</body>
+</html>

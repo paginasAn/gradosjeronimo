@@ -1,0 +1,180 @@
+/* ============================
+   Estilos globales y variables
+   ============================ */
+:root{
+  --rojo: #c62828;
+  --rojo-oscuro: #8e1b1b;
+  --blanco: #ffffff;
+  --beige-papel: #fffaf3;
+  --texto: #2b2b2b;
+  --max-width: 880px;
+  --padding-main: 36px;
+  --transition: 300ms ease;
+}
+
+/* Reset básico */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Georgia", serif;
+  color:var(--texto);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: linear-gradient(180deg, #fff 0%, #fff 70%, #fdecea 100%);
+}
+
+/* -------------------------
+   PÁGINA: SOBRE (index.html)
+   ------------------------- */
+.sobre-body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:18px;
+  padding:40px 20px;
+  background: linear-gradient(180deg,#fff 0%, #fdecea 60%, #f7e6e6 100%);
+}
+
+.sobre-viewport{display:flex;flex-direction:column;align-items:center;gap:14px}
+
+/* Birrete principal - imagen local - con animación flotante */
+.birrete-main{
+  width:110px;
+  max-width:22vw;
+  min-width:80px;
+  transform-origin:center;
+  animation: floatMain 3.6s ease-in-out infinite;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25));
+  z-index:5;
+  pointer-events:none;
+}
+@keyframes floatMain {
+  0%{ transform: translateY(0) rotateZ(-6deg) }
+  50%{ transform: translateY(-12px) rotateZ(-4deg) }
+  100%{ transform: translateY(0) rotateZ(-6deg) }
+}
+
+/* Sobre elegante como botón (accesible) */
+.sobre{
+  border: none;
+  background: transparent;
+  padding:0;
+  cursor:pointer;
+  display:inline-block;
+  outline: none;
+}
+.sobre:active { transform: translateY(2px) }
+
+.sobre-cuerpo{
+  width:320px;
+  max-width:82vw;
+  height:210px;
+  position:relative;
+  perspective:1200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* cuerpo del sobre */
+.sobre-front{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg,#fff,#f9f0ee);
+  border-radius:12px;
+  border:3px solid var(--rojo);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.18),
+    inset 0 2px 0 rgba(255,255,255,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform: translateZ(0);
+}
+
+/* sello con nombre */
+.sello{
+  font-family:"Georgia",serif;
+  color:var(--rojo-oscuro);
+  font-weight:700;
+  letter-spacing:1px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+  padding:8px 18px;
+  border-radius:22px;
+  border:1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+/* tapa triangular realista */
+.sobre-flap{
+  position:absolute;
+  top:-2px;
+  left:50%;
+  width:90%;
+  height:74%;
+  transform: translateX(-50%) rotateX(0deg);
+  transform-origin: top center;
+  background: linear-gradient(180deg, var(--rojo), var(--rojo-oscuro));
+  border-top-left-radius:12px;
+  border-top-right-radius:12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+  z-index:4;
+}
+
+/* cuando el sobre "abre" -- se aplica por JS */
+.sobre.abierto .sobre-flap{
+  transform: translateX(-50%) rotateX(180deg) translateY(-6px);
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* pista/hint */
+.hint{
+  margin:0;
+  color:var(--rojo-oscuro);
+  font-weight:600;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  font-size:0.98rem;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .carta-box {
+    padding: 40px 25px;
+  }
+
+  .carta-box h1 {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+
+/* animation for falling: vertical fall + tilt */
+@keyframes fall {
+  0%{ transform: translateY(-120px) rotate(-15deg); opacity:0 }
+  10%{ opacity:0.15 }
+  60%{ opacity:0.28 }
+  100%{ transform: translateY(120vh) rotate(10deg); opacity:0.28 }
+}
+
+/* responsive tweaks */
+@media (max-width:900px){
+  :root{ --padding-main: 20px }
+  .carta{ border-width:8px }
+  .foto-jeronimo{ width:120px;height:120px }
+}
+@media (max-width:600px){
+  .carta{ padding:20px }
+  .carta-inner{ padding:20px }
+  .foto-jeronimo{ width:100px;height:100px }
+  .birrete-main{ width:90px }
+}
